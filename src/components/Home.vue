@@ -12,7 +12,51 @@
           @input="update"
         ></v-textarea>
       </v-col>
-      <v-col cols="12" xs="12" sm="6">2</v-col>
+      <v-col cols="12" xs="12" sm="6">
+        <h3>Information Distribution</h3>
+        <v-divider></v-divider>
+
+        <v-container class="text-left">
+          <template v-if="input.length">
+            <p>
+              Total active cases today:
+              {{ totalPatientsCount }}
+            </p>
+            <p>Total expired patients: {{ totalExpiredPatients }}</p>
+            <p>
+              Works outside LB: {{ worksOutsideLBCount }}/{{
+                totalPatientsCount
+              }}
+            </p>
+
+            Count of Added Cases in:
+            <p v-if="countAnos">Anos: {{ countAnos }}</p>
+            <p v-if="countBagongSilang">
+              Bagong Silang: {{ countBagongSilang }}
+            </p>
+            <p v-if="countBambang">Bambang: {{ countBambang }}</p>
+            <p v-if="countBatongMalake">
+              Batong Malake: {{ countBatongMalake }}
+            </p>
+            <p v-if="countBaybayin">Baybayin: {{ countBaybayin }}</p>
+            <p v-if="countBayog">Bayog: {{ countBayog }}</p>
+            <p v-if="countLalakay">Lalakay: {{ countLalakay }}</p>
+            <p v-if="countMaahas">Maahas: {{ countMaahas }}</p>
+            <p v-if="countMalinta">Malinta: {{ countMalinta }}</p>
+            <p v-if="countMayondon">Mayondon: {{ countMayondon }}</p>
+            <p v-if="countSanAntonio">San Antonio: {{ countSanAntonio }}</p>
+            <p v-if="countTadlac">Tadlac: {{ countTadlac }}</p>
+            <p v-if="countTimugan">Timugan: {{ countTimugan }}</p>
+            <p v-if="countTuntunginPutho">
+              Tuntungin Putho: {{ countTuntunginPutho }}
+            </p>
+            <p v-if="countBJMP">BJMP: {{ countBJMP }}</p>
+          </template>
+          <template v-else>
+            <p class="font-italic">No entered details yet</p>
+          </template>
+        </v-container>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -118,38 +162,42 @@ export default {
     },
 
     update: _.debounce(function(e) {
-      this.resetAllCounts()
+      if (e) {
+        this.resetAllCounts()
 
-      const lines = e.target.value
-      const splitLines = lines.split('\n')
+        const lines = e
+        const splitLines = lines.split('\n')
 
-      let patientDetails = {}
-      let totalPatients = []
+        let patientDetails = {}
+        let totalPatients = []
 
-      for (let i = 0; i < splitLines.length; i++) {
-        if (splitLines[i].match(/LB C/g)) {
-          patientDetails['patientCode'] = splitLines[i]
-          patientDetails['location'] = splitLines[i + 2]
-          this.setCountBrgy(splitLines[i + 2])
-          // start object creation
-        } else if (splitLines[i].match(/Works outside of LB/g)) {
-          this.worksOutsideLBCount++
-        } else if (splitLines[i].match(/Expired/g)) {
-          this.totalExpiredPatients++
-        } else if (splitLines[i].match(/Contact Tracing done/g)) {
-          totalPatients.push(patientDetails)
-          patientDetails = {}
-          // push the created object
-          // clear the created object
+        for (let i = 0; i < splitLines.length; i++) {
+          if (splitLines[i].match(/LB C/g)) {
+            patientDetails['patientCode'] = splitLines[i]
+            patientDetails['location'] = splitLines[i + 2]
+            this.setCountBrgy(splitLines[i + 2])
+            // start object creation
+          } else if (splitLines[i].match(/Works outside of LB/g)) {
+            this.worksOutsideLBCount++
+          } else if (splitLines[i].match(/Expired/g)) {
+            this.totalExpiredPatients++
+          } else if (splitLines[i].match(/Contact Tracing done/g)) {
+            totalPatients.push(patientDetails)
+            patientDetails = {}
+            // push the created object
+            // clear the created object
+          }
         }
-      }
 
-      // console.log('totalPatients:', totalPatients)
-      // console.log('total count Patients:', totalPatients.length)
-      // console.log('works outside LB:', this.worksOutsideLBCount)
-      this.totalPatientsCount = totalPatients.length - this.totalExpiredPatients
+        // console.log('totalPatients:', totalPatients)
+        // console.log('total count Patients:', totalPatients.length)
+        // console.log('works outside LB:', this.worksOutsideLBCount)
+        this.totalPatientsCount =
+          totalPatients.length - this.totalExpiredPatients
 
-      this.input = e.target.value
+        this.input = e
+        console.log('this.input:', this.input)
+      } else this.input = ''
     }, 300)
   }
 }
