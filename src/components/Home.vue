@@ -173,11 +173,11 @@ export default {
       this.countBJMP = 0
     },
 
-    update: _.debounce(function(e) {
-      if (e) {
+    update: _.debounce(function(details) {
+      if (details) {
         this.resetAllCounts()
 
-        const lines = e
+        const lines = details
         const splitLines = lines.split('\n')
 
         let patientDetails = {}
@@ -208,8 +208,8 @@ export default {
 
         this.totalPatientsCount = totalPatients.length
 
-        this.input = e
-      } else this.input = ''
+        this.input = details
+      } else this.input = '' // this is for clearing the Information Distribution
     }, 300)
   }
 }
