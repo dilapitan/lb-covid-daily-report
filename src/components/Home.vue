@@ -16,7 +16,17 @@
           <a href="https://www.facebook.com/elbilagunaph" target="_blank">
             Municipal Government of Los Baños
           </a>
-          <p></p>
+
+          <br /><br /><br />
+
+          <p>
+            <strong>Disclaimer:</strong>
+            This web app is only for easy tallying of daily Covid-19 cases in
+            Los Banos, Laguna that does not come in the original Facebook posts
+            of LB Municipal since the post is just plain text. It's hard to
+            manually tally the cases per baranggay, count the daily recoveries
+            and expired patients. Therefore the app is created.
+          </p>
         </v-container>
       </v-col>
       <v-col cols="12" xs="12" sm="6">
