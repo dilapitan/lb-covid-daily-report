@@ -11,6 +11,13 @@
           :value="input"
           @input="update"
         ></v-textarea>
+        <v-container class="text-left caption">
+          <p>For source and more information, please visit:</p>
+          <a href="https://www.facebook.com/elbilagunaph" target="_blank">
+            Municipal Government of Los Baños
+          </a>
+          <p></p>
+        </v-container>
       </v-col>
       <v-col cols="12" xs="12" sm="6">
         <h3>Information Distribution</h3>
