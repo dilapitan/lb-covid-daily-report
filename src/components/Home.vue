@@ -19,38 +19,44 @@
         <v-container class="text-left">
           <template v-if="input.length">
             <p>
-              Total active cases today:
+              <strong>Total active cases today:</strong>
               {{ totalPatientsCount }}
             </p>
-            <p>Total expired patients: {{ totalExpiredPatients }}</p>
             <p>
-              Works outside LB: {{ worksOutsideLBCount }}/{{
-                totalPatientsCount
-              }}
+              <strong>Total expired patients:</strong>
+              {{ totalExpiredPatients }}
+            </p>
+            <p>
+              <strong>Works outside LB:</strong>
+              {{ worksOutsideLBCount }}/{{ totalPatientsCount }}
             </p>
 
-            Count of Added Cases in:
-            <p v-if="countAnos">Anos: {{ countAnos }}</p>
-            <p v-if="countBagongSilang">
-              Bagong Silang: {{ countBagongSilang }}
-            </p>
-            <p v-if="countBambang">Bambang: {{ countBambang }}</p>
-            <p v-if="countBatongMalake">
-              Batong Malake: {{ countBatongMalake }}
-            </p>
-            <p v-if="countBaybayin">Baybayin: {{ countBaybayin }}</p>
-            <p v-if="countBayog">Bayog: {{ countBayog }}</p>
-            <p v-if="countLalakay">Lalakay: {{ countLalakay }}</p>
-            <p v-if="countMaahas">Maahas: {{ countMaahas }}</p>
-            <p v-if="countMalinta">Malinta: {{ countMalinta }}</p>
-            <p v-if="countMayondon">Mayondon: {{ countMayondon }}</p>
-            <p v-if="countSanAntonio">San Antonio: {{ countSanAntonio }}</p>
-            <p v-if="countTadlac">Tadlac: {{ countTadlac }}</p>
-            <p v-if="countTimugan">Timugan: {{ countTimugan }}</p>
-            <p v-if="countTuntunginPutho">
-              Tuntungin Putho: {{ countTuntunginPutho }}
-            </p>
-            <p v-if="countBJMP">BJMP: {{ countBJMP }}</p>
+            <v-divider></v-divider>
+            <br />
+            <p class="font-weight-bold">Count of Added Cases in:</p>
+            <v-container>
+              <p v-if="countAnos">Anos: {{ countAnos }}</p>
+              <p v-if="countBagongSilang">
+                Bagong Silang: {{ countBagongSilang }}
+              </p>
+              <p v-if="countBambang">Bambang: {{ countBambang }}</p>
+              <p v-if="countBatongMalake">
+                Batong Malake: {{ countBatongMalake }}
+              </p>
+              <p v-if="countBaybayin">Baybayin: {{ countBaybayin }}</p>
+              <p v-if="countBayog">Bayog: {{ countBayog }}</p>
+              <p v-if="countLalakay">Lalakay: {{ countLalakay }}</p>
+              <p v-if="countMaahas">Maahas: {{ countMaahas }}</p>
+              <p v-if="countMalinta">Malinta: {{ countMalinta }}</p>
+              <p v-if="countMayondon">Mayondon: {{ countMayondon }}</p>
+              <p v-if="countSanAntonio">San Antonio: {{ countSanAntonio }}</p>
+              <p v-if="countTadlac">Tadlac: {{ countTadlac }}</p>
+              <p v-if="countTimugan">Timugan: {{ countTimugan }}</p>
+              <p v-if="countTuntunginPutho">
+                Tuntungin Putho: {{ countTuntunginPutho }}
+              </p>
+              <p v-if="countBJMP">BJMP: {{ countBJMP }}</p>
+            </v-container>
           </template>
           <template v-else>
             <p class="font-italic">No entered details yet</p>
