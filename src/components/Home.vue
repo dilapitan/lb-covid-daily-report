@@ -189,25 +189,24 @@ export default {
             patientDetails['location'] = splitLines[i + 2]
             this.setCountBrgy(splitLines[i + 2])
             // start object creation
-          } else if (splitLines[i].match(/RECOVERIES/g)) {
-            this.totalRecoveredPatients = splitLines[i + 1].split(',').length
-          } else if (splitLines[i].match(/Works outside of LB/g)) {
-            this.worksOutsideLBCount++
-          } else if (splitLines[i].match(/Expired/g)) {
-            this.totalExpiredPatients++
           } else if (splitLines[i].match(/Contact Tracing done/g)) {
             totalPatients.push(patientDetails)
             patientDetails = {}
             // push the created object
             // clear the created object
+          } else if (splitLines[i].match(/RECOVERIES|RECOVERY/g)) {
+            this.totalRecoveredPatients = splitLines[i + 1].split(',').length
+          } else if (splitLines[i].match(/EXPIRED|DECEASED/g)) {
+            const deaths = splitLines[i + 1].split(',').length
+            this.totalExpiredPatients = this.totalExpiredPatients + deaths
+          } else if (splitLines[i].match(/Works outside of LB/g)) {
+            this.worksOutsideLBCount++
+          } else if (splitLines[i].match(/Expired/g)) {
+            this.totalExpiredPatients++
           }
         }
 
-        // console.log('totalPatients:', totalPatients)
-        // console.log('total count Patients:', totalPatients.length)
-        // console.log('works outside LB:', this.worksOutsideLBCount)
-        this.totalPatientsCount =
-          totalPatients.length - this.totalExpiredPatients
+        this.totalPatientsCount = totalPatients.length
 
         this.input = e
       } else this.input = ''
