@@ -27,6 +27,10 @@
               {{ totalExpiredPatients }}
             </p>
             <p>
+              <strong>Total recovered cases today:</strong>
+              {{ totalRecoveredPatients }}
+            </p>
+            <p>
               <strong>Works outside LB:</strong>
               {{ worksOutsideLBCount }}/{{ totalPatientsCount }}
             </p>
@@ -77,6 +81,7 @@ export default {
     worksOutsideLBCount: 0,
     totalPatientsCount: 0,
     totalExpiredPatients: 0,
+    totalRecoveredPatients: 0,
 
     countAnos: 0,
     countBagongSilang: 0,
@@ -150,6 +155,7 @@ export default {
       this.worksOutsideLBCount = 0
       this.totalPatientsCount = 0
       this.totalExpiredPatients = 0
+      this.totalRecoveredPatients = 0
       this.countAnos = 0
       this.countBagongSilang = 0
       this.countBambang = 0
@@ -183,6 +189,8 @@ export default {
             patientDetails['location'] = splitLines[i + 2]
             this.setCountBrgy(splitLines[i + 2])
             // start object creation
+          } else if (splitLines[i].match(/RECOVERIES/g)) {
+            this.totalRecoveredPatients = splitLines[i + 1].split(',').length
           } else if (splitLines[i].match(/Works outside of LB/g)) {
             this.worksOutsideLBCount++
           } else if (splitLines[i].match(/Expired/g)) {
@@ -202,7 +210,6 @@ export default {
           totalPatients.length - this.totalExpiredPatients
 
         this.input = e
-        console.log('this.input:', this.input)
       } else this.input = ''
     }, 300)
   }
