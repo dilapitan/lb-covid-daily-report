@@ -2,7 +2,7 @@
   <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
     <v-app-bar app color="primary" dark>
       <v-toolbar-title>
-        <strong>LB</strong>
+        <strong>LB Covid Daily Counter</strong>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
